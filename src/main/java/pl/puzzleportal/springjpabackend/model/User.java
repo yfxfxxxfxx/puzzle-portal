@@ -2,7 +2,6 @@ package pl.puzzleportal.springjpabackend.model;
 
 
 import lombok.*;
-
 import javax.persistence.*;
 
 @Entity
@@ -14,6 +13,6 @@ import javax.persistence.*;
 public class User extends BaseEntity {
     private String login;
     private String password;
-    private String mail;
+    private String email;
     private long points;
 }
