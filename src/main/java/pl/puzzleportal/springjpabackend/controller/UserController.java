@@ -21,12 +21,12 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/id/{id}")
     public User retrieveUserById(@PathVariable("id") Long id) {
         return Preconditions.checkNotNull(userService.findById(id));
     }
 
-    @GetMapping(value = "/{login}")
+    @GetMapping(value = "/login/{login}")
     public User retrieveUserByLogin(@PathVariable("login") String login) {
         return Preconditions.checkNotNull(userService.findByLogin(login));
     }
