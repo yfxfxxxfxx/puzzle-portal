@@ -9,5 +9,6 @@ public interface UserService {
     User findById(Long id);
     Long create(User user);
     User findByLogin(String login);
-    void delete(Long id);
+    void update(Long id, User user);
+    void deleteById(Long id);
 }
