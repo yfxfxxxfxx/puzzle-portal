@@ -7,5 +7,5 @@ import pl.puzzleportal.springjpabackend.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {
     User findByLogin(String login);
-    void delete(Long id);
+    void deleteById(Long id);
 }
