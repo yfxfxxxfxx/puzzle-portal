@@ -8,13 +8,13 @@ import javax.sql.DataSource;
 
 @Configuration
 public class DataSourceConfig {
-
-    @Bean
-    public DataSource getDataSource() {
-        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
-        dataSourceBuilder.username("SA");
-        dataSourceBuilder.password("");
-        return dataSourceBuilder.build();
-    }
+//
+//    @Bean
+//    public DataSource getDataSource() {
+//        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
+//        dataSourceBuilder.username("SA");
+//        dataSourceBuilder.password("");
+//        return dataSourceBuilder.build();
+//    }
 
 }

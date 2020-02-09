@@ -24,7 +24,7 @@ public class UserRepositoryIntegrationTest {
     public void whenCalledSave_thenCorrectNumberOfUsers(){
         User user1 = new User();
         User user2 = new User("login","password","logn@wp.pl",0);
-
+        user1.setMail("wwwwww@wp.pl");
         user1.setLogin("user1");
         user1.setPassword("password1");
         user1.setPoints(0);

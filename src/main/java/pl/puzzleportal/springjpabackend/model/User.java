@@ -10,20 +10,10 @@ import javax.persistence.*;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-public class User {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @NonNull
+@ToString(exclude = "password")
+public class User extends BaseEntity {
     private String login;
-
-    @NonNull
     private String password;
-    @NonNull
     private String mail;
-    @NonNull
     private long points;
 }
