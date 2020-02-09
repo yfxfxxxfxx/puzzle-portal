@@ -2,6 +2,7 @@ package pl.puzzleportal.springjpabackend.model;
 
 
 import lombok.*;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,9 +10,20 @@ import javax.persistence.*;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "password")
-public class User extends BaseEntity {
+@Data
+public class User {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @NonNull
     private String login;
+
+    @NonNull
     private String password;
+    @NonNull
+    private String mail;
+    @NonNull
     private long points;
 }
