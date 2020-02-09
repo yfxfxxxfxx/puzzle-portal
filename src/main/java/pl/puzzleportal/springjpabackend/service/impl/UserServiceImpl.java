@@ -15,7 +15,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public List<User> getUserDetails() {
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
@@ -24,9 +24,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(id).orElse(null);
     }
 
+    //TODO: test jednostkowy, czy metoda faktycznie zwraca wartosc
     @Override
-    public User save(User user) {
-        return userRepository.save(user);
+    public Long create(User user) {
+        userRepository.save(user);
+        return user.getId();
     }
 
     @Override

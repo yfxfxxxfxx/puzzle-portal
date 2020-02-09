@@ -5,9 +5,9 @@ import pl.puzzleportal.springjpabackend.model.User;
 import java.util.List;
 
 public interface UserService {
-    List<User> getUserDetails();
+    List<User> getAllUsers();
     User findById(Long id);
-    User save(User user);
+    Long create(User user);
     User findByLogin(String login);
     void delete(Long id);
 }
