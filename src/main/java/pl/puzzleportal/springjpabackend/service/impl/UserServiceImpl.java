@@ -44,6 +44,7 @@ public class UserServiceImpl implements UserService {
         destinationUser.setLogin(sourceUser.getLogin());
         destinationUser.setPassword(sourceUser.getPassword());
         destinationUser.setPoints(sourceUser.getPoints());
+        userRepository.save(destinationUser);
     }
 
     @Override

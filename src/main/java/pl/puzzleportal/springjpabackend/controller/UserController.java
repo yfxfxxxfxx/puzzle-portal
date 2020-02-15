@@ -9,6 +9,7 @@ import pl.puzzleportal.springjpabackend.service.UserService;
 
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -38,7 +39,7 @@ public class UserController {
         return userService.create(resource);
     }
 
-    @PutMapping(value = "/{id}")
+    @PutMapping("/id/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void update(@PathVariable("id") Long id, @RequestBody User resource) {
         Preconditions.checkNotNull(resource);
@@ -46,7 +47,7 @@ public class UserController {
         userService.update(id, resource);
     }
 
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/id/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable("id") Long id) {
         userService.deleteById(id);
