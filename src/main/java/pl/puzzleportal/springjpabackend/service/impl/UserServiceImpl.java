@@ -1,50 +1,58 @@
 package pl.puzzleportal.springjpabackend.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.puzzleportal.springjpabackend.entity.Privilege;
 import pl.puzzleportal.springjpabackend.exceptions.NotFoundException;
-import pl.puzzleportal.springjpabackend.model.User;
+import pl.puzzleportal.springjpabackend.entity.UserEntity;
 import pl.puzzleportal.springjpabackend.repository.UserRepository;
 import pl.puzzleportal.springjpabackend.service.UserService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
     private UserRepository userRepository;
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
-    public List<User> getAllUsers() {
+    public List<UserEntity> getAllUsers() {
         return userRepository.findAll();
     }
 
     @Override
-    public User findById(Long id) {
+    public UserEntity findById(Long id) {
         return userRepository.findById(id).orElseThrow(NotFoundException::new);
     }
 
-    //TODO: test jednostkowy, czy metoda faktycznie zwraca wartosc
     @Override
-    public Long create(User user) {
-        userRepository.save(user);
-        return user.getId();
+    public Long save(UserEntity userEntity) {
+        String password = passwordEncoder.encode(userEntity.getPassword());
+        userEntity.setPassword(password);
+        userEntity.setPrivilege(Privilege.USER);
+        userRepository.save(userEntity);
     }
 
     @Override
-    public User findByLogin(String login) {
+    public UserEntity findByLogin(String login) {
         return userRepository.findByLogin(login);
     }
 
     @Override
-    public void update(Long id, User sourceUser) {
-        User destinationUser = findById(id);
-        destinationUser.setLogin(sourceUser.getLogin());
-//        destinationUser.setPassword(sourceUser.getPassword());
-        destinationUser.setPoints(sourceUser.getPoints());
-        userRepository.save(destinationUser);
+    public void update(Long id, UserEntity sourceUserEntity) {
+        UserEntity destinationUserEntity = findById(id);
+        destinationUserEntity.setLogin(sourceUserEntity.getLogin());
+        destinationUser.setPassword(sourceUser.getPassword());
+        destinationUserEntity.setPoints(sourceUserEntity.getPoints());
+        userRepository.save(destinationUserEntity);
     }
 
     @Override

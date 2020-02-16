@@ -4,10 +4,9 @@ import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.puzzleportal.springjpabackend.model.User;
+import pl.puzzleportal.springjpabackend.entity.UserEntity;
 import pl.puzzleportal.springjpabackend.service.UserService;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 
@@ -25,30 +24,30 @@ public class UserController {
 //    }
 
     @GetMapping
-    public List<User> retrieveUsers() {
+    public List<UserEntity> retrieveUsers() {
         return userService.getAllUsers();
     }
 
     @GetMapping(value = "/id/{id}")
-    public User retrieveUserById(@PathVariable("id") Long id) {
+    public UserEntity retrieveUserById(@PathVariable("id") Long id) {
         return Preconditions.checkNotNull(userService.findById(id));
     }
 
     @GetMapping(value = "/login/{login}")
-    public User retrieveUserByLogin(@PathVariable("login") String login) {
+    public UserEntity retrieveUserByLogin(@PathVariable("login") String login) {
         return Preconditions.checkNotNull(userService.findByLogin(login));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Long create(@RequestBody User resource) {
+    public Long create(@RequestBody UserEntity resource) {
         Preconditions.checkNotNull(resource);
-        return userService.create(resource);
+        return userService.save(resource);
     }
 
     @PutMapping("/id/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable("id") Long id, @RequestBody User resource) {
+    public void update(@PathVariable("id") Long id, @RequestBody UserEntity resource) {
         Preconditions.checkNotNull(resource);
         RestPreconditions.checkFound(userService.findById(resource.getId()));
         userService.update(id, resource);

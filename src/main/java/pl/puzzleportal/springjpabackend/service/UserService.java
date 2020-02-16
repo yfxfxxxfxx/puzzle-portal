@@ -1,14 +1,14 @@
 package pl.puzzleportal.springjpabackend.service;
 
-import pl.puzzleportal.springjpabackend.model.User;
+import pl.puzzleportal.springjpabackend.entity.UserEntity;
 
 import java.util.List;
 
 public interface UserService {
-    List<User> getAllUsers();
-    User findById(Long id);
-    Long create(User user);
-    User findByLogin(String login);
-    void update(Long id, User user);
+    List<UserEntity> getAllUsers();
+    UserEntity findById(Long id);
+    Long save(UserEntity userEntity);
+    UserEntity findByLogin(String login);
+    void update(Long id, UserEntity userEntity);
     void deleteById(Long id);
 }
