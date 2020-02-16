@@ -5,7 +5,6 @@ public class RestPreconditions {
         if (resource == null) {
             throw new NullPointerException();
         }
-
         return resource;
     }
 }

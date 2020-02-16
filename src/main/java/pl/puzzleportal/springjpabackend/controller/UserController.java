@@ -4,9 +4,11 @@ import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import pl.puzzleportal.springjpabackend.entity.Privilege;
 import pl.puzzleportal.springjpabackend.entity.UserEntity;
 import pl.puzzleportal.springjpabackend.service.UserService;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 
@@ -14,14 +16,18 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
     private UserService userService;
 
-//    @PostConstruct
-//    public void addFirstUser(){
-//        User user = new User("email@gmai.com", passwordEncoder.encode("some-password"));
-//        userRepository.save(user);
-//    }
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @PostConstruct
+    public void addFirstUser() {
+        UserEntity user = new UserEntity("test1","password1", Privilege.USER,0);
+        userService.save(user);
+    }
 
     @GetMapping
     public List<UserEntity> retrieveUsers() {
@@ -40,7 +46,7 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Long create(@RequestBody UserEntity resource) {
+    public Long save(@RequestBody UserEntity resource) {
         Preconditions.checkNotNull(resource);
         return userService.save(resource);
     }
