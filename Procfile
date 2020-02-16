@@ -1,0 +1,1 @@
+web: java -jar target/spring-jpa-backend-0.0.1-SNAPSHOT.jar --port $PORT
