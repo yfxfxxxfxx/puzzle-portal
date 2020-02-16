@@ -26,7 +26,6 @@ public class UserRepositoryIntegrationTest {
         User user2 = new User("user2","password2",0);
 
         user1.setLogin("user1");
-        user1.setPassword("password1");
         user1.setPoints(0);
 
         userRepository.save(user1);

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.puzzleportal.springjpabackend.model.User;
 import pl.puzzleportal.springjpabackend.service.UserService;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 
@@ -16,6 +17,12 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+//    @PostConstruct
+//    public void addFirstUser(){
+//        User user = new User("email@gmai.com", passwordEncoder.encode("some-password"));
+//        userRepository.save(user);
+//    }
 
     @GetMapping
     public List<User> retrieveUsers() {

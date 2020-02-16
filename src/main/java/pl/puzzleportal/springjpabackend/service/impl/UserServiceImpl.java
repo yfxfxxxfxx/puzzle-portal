@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
     public void update(Long id, User sourceUser) {
         User destinationUser = findById(id);
         destinationUser.setLogin(sourceUser.getLogin());
-        destinationUser.setPassword(sourceUser.getPassword());
+//        destinationUser.setPassword(sourceUser.getPassword());
         destinationUser.setPoints(sourceUser.getPoints());
         userRepository.save(destinationUser);
     }
