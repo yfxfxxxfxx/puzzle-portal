@@ -8,7 +8,7 @@ public interface UserService {
     List<UserEntity> getAllUsers();
     UserEntity findById(Long id);
     Long save(UserEntity userEntity);
-    UserEntity findByLogin(String login);
+    UserEntity findByUsername(String login);
     void update(Long id, UserEntity userEntity);
     void deleteById(Long id);
 }

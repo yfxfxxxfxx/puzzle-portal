@@ -35,7 +35,7 @@ public class UserController {
 
     @GetMapping(value = "/login/{login}")
     public UserEntity retrieveUserByLogin(@PathVariable("login") String login) {
-        return Preconditions.checkNotNull(userService.findByLogin(login));
+        return Preconditions.checkNotNull(userService.findByUsername(login));
     }
 
     @PostMapping

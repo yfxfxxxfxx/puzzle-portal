@@ -39,18 +39,19 @@ public class UserServiceImpl implements UserService {
         userEntity.setPassword(password);
         userEntity.setPrivilege(Privilege.USER);
         userRepository.save(userEntity);
+        return userEntity.getId();
     }
 
     @Override
-    public UserEntity findByLogin(String login) {
-        return userRepository.findByLogin(login);
+    public UserEntity findByUsername(String login) {
+        return userRepository.findByUsername(login);
     }
 
     @Override
     public void update(Long id, UserEntity sourceUserEntity) {
         UserEntity destinationUserEntity = findById(id);
-        destinationUserEntity.setLogin(sourceUserEntity.getLogin());
-        destinationUser.setPassword(sourceUser.getPassword());
+//        destinationUserEntity.setLogin(sourceUserEntity.getLogin());
+//        destinationUser.setPassword(sourceUser.getPassword());
         destinationUserEntity.setPoints(sourceUserEntity.getPoints());
         userRepository.save(destinationUserEntity);
     }

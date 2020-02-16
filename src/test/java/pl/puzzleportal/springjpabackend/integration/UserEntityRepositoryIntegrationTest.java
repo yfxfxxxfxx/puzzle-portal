@@ -17,22 +17,22 @@ import static org.junit.Assert.*;
 @DataJpaTest
 public class UserEntityRepositoryIntegrationTest {
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Test
-    public void whenCalledSave_thenCorrectNumberOfUsers(){
-        UserEntity userEntity1 = new UserEntity();
-        UserEntity userEntity2 = new UserEntity("user2","password2",0);
-
-        userEntity1.setLogin("user1");
-        userEntity1.setPoints(0);
-
-        userRepository.save(userEntity1);
-        userRepository.save(userEntity2);
-
-        List<UserEntity> userEntities = userRepository.findAll();
-
-        assertThat(userEntities.size(), is(2));
-    }
+//    @Autowired
+//    private UserRepository userRepository;
+//
+//    @Test
+//    public void whenCalledSave_thenCorrectNumberOfUsers(){
+////        UserEntity userEntity1 = new UserEntity();
+////        UserEntity userEntity2 = new UserEntity("user2","password2",0);
+////
+////        userEntity1.setLogin("user1");
+////        userEntity1.setPoints(0);
+////
+////        userRepository.save(userEntity1);
+////        userRepository.save(userEntity2);
+////
+////        List<UserEntity> userEntities = userRepository.findAll();
+////
+////        assertThat(userEntities.size(), is(2));
+//    }
 }
