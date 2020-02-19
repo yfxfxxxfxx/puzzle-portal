@@ -15,6 +15,4 @@ import javax.persistence.Entity;
 public class Game extends BaseEntity {
     private String name;
     private String category;
-
-
 }

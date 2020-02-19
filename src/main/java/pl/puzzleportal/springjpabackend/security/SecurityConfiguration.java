@@ -1,6 +1,5 @@
 package pl.puzzleportal.springjpabackend.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -28,7 +27,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
+        http
+                .authorizeRequests()
+                .antMatchers("/**").permitAll()
+                .antMatchers("/help").authenticated()
+                .antMatchers("/help").hasRole("USER")
+                .and()
+                .httpBasic()
+                .and().csrf().disable();
     }
 
     @Bean

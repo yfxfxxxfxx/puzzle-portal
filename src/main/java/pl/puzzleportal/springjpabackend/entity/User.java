@@ -11,14 +11,12 @@ import java.util.*;
 
 @Entity
 @Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class User extends BaseEntity {
 
-    @Column(nullable = false)
     private String username;
-
-    @Column(nullable = false)
     private String password;
-
     private int points;
     private int active;
     private String roles = "";
@@ -32,8 +30,6 @@ public class User extends BaseEntity {
         this.permissions = permissions;
         this.active = 1;
     }
-
-    protected User(){}
 
     public List<String> getRoleList(){
         if(this.roles.length() > 0) {
