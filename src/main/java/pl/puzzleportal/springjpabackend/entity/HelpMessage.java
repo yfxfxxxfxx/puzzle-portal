@@ -1,4 +1,4 @@
-package pl.puzzleportal.springjpabackend.model;
+package pl.puzzleportal.springjpabackend.entity;
 
 public class HelpMessage {
 
