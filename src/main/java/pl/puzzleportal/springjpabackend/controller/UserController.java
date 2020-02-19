@@ -1,14 +1,11 @@
 package pl.puzzleportal.springjpabackend.controller;
 
 import com.google.common.base.Preconditions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.puzzleportal.springjpabackend.entity.Privilege;
-import pl.puzzleportal.springjpabackend.entity.UserEntity;
-import pl.puzzleportal.springjpabackend.service.UserService;
+import pl.puzzleportal.springjpabackend.entity.User;
+import pl.puzzleportal.springjpabackend.repository.UserRepository;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 
@@ -16,53 +13,46 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
-    private UserService userService;
+    private UserRepository userRepository;
 
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
-
-    @PostConstruct
-    public void addFirstUser() {
-        UserEntity user = new UserEntity("test1","password1", Privilege.USER,0);
-        userService.save(user);
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @GetMapping
-    public List<UserEntity> retrieveUsers() {
-        return userService.getAllUsers();
+    public List<User> retrieveUsers() {
+        return userRepository.findAll();
     }
 
     @GetMapping(value = "/id/{id}")
-    public UserEntity retrieveUserById(@PathVariable("id") Long id) {
-        return Preconditions.checkNotNull(userService.findById(id));
+    public User retrieveUserById(@PathVariable("id") Long id) {
+        return Preconditions.checkNotNull(userRepository.findById(id).orElse(null));
     }
 
     @GetMapping(value = "/login/{login}")
-    public UserEntity retrieveUserByLogin(@PathVariable("login") String login) {
-        return Preconditions.checkNotNull(userService.findByUsername(login));
+    public User retrieveUserByLogin(@PathVariable("login") String login) {
+        return Preconditions.checkNotNull(userRepository.findByUsername(login));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Long save(@RequestBody UserEntity resource) {
+    public User save(@RequestBody User resource) {
         Preconditions.checkNotNull(resource);
-        return userService.save(resource);
+        return userRepository.save(resource);
     }
 
     @PutMapping("/id/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable("id") Long id, @RequestBody UserEntity resource) {
+    public void update(@PathVariable("id") Long id, @RequestBody User resource) {
         Preconditions.checkNotNull(resource);
-        RestPreconditions.checkFound(userService.findById(resource.getId()));
-        userService.update(id, resource);
+        RestPreconditions.checkFound(userRepository.findById(resource.getId()));
+//        userRepository.update(id, resource);
     }
 
     @DeleteMapping(value = "/id/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable("id") Long id) {
-        userService.deleteById(id);
+        userRepository.deleteById(id);
     }
 
 }
