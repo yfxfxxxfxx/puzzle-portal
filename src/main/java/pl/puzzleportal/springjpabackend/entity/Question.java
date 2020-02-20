@@ -2,6 +2,7 @@ package pl.puzzleportal.springjpabackend.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
@@ -9,8 +10,8 @@ import javax.persistence.Entity;
 @Entity
 @Getter
 @Setter
-//@NoArgsConstructor
+@NoArgsConstructor
 @AllArgsConstructor
 public class Question extends BaseEntity {
-    
+    private String text;
 }

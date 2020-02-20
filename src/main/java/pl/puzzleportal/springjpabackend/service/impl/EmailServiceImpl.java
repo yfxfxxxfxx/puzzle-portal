@@ -1,6 +1,7 @@
 package pl.puzzleportal.springjpabackend.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -13,6 +14,7 @@ import javax.mail.internet.MimeMessage;
 import java.io.File;
 
 @Service
+@PropertySource("classpath:application-local.properties")
 public class EmailServiceImpl implements EmailService {
 
     @Autowired

@@ -1,6 +1,5 @@
 package pl.puzzleportal.springjpabackend.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,13 +14,17 @@ import java.util.logging.Logger;
 @RequestMapping("/help")
 public class HelpController {
 
-    @Autowired
     private EmailService emailService;
+    private Logger helpLogger;
+
+    public HelpController(EmailService emailService) {
+        this.emailService = emailService;
+        this.helpLogger =  Logger.getLogger(getClass().getName());
+    }
 
     @Value("${spring.mail.username}")
     private String destination;
 
-    private Logger helpLogger = Logger.getLogger(getClass().getName());
 
     @PostMapping
     public void getMessage(@RequestBody HelpMessage message){
