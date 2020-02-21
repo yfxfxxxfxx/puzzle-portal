@@ -4,8 +4,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.puzzleportal.springjpabackend.entity.Game;
+import pl.puzzleportal.springjpabackend.entity.GameInfo;
 import pl.puzzleportal.springjpabackend.repository.GameRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -21,6 +23,19 @@ public class GameController {
     @GetMapping
     public List<Game> findAllGames(){
         return this.gameRepository.findAll();
+    }
+
+    @GetMapping("/info")
+    public List<GameInfo> getInfoFromAllGames(){
+        List<GameInfo> gamesInfo = new ArrayList<>();
+
+        List<Game> games = this.gameRepository.findAll();
+
+        for (Game game : games) {
+            gamesInfo.add(new GameInfo(game.getName(),game.getCategory()));
+        }
+
+        return gamesInfo;
     }
 
 }
