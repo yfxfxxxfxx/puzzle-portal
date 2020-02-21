@@ -2,7 +2,10 @@ package pl.puzzleportal.springjpabackend.controller;
 
 import com.google.common.base.Preconditions;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import pl.puzzleportal.springjpabackend.entity.User;
 import pl.puzzleportal.springjpabackend.repository.UserRepository;
 
@@ -22,6 +25,13 @@ public class UserController {
     @GetMapping
     public List<User> retrieveUsers() {
         return userRepository.findAll();
+    }
+
+    @GetMapping("/loggedUser")
+    public User getAuthenticatedUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        return retrieveUserByLogin(currentPrincipalName);
     }
 
     @GetMapping(value = "/id/{id}")
