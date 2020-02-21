@@ -35,8 +35,8 @@ public class DbStartup implements CommandLineRunner {
         this.gameRepository.deleteAll();
 
         //Create users
-        User test = new User("test",passwordEncoder.encode("test"), 0,"USER","");
-        User example = new User("example",passwordEncoder.encode("example"), 0,"USER","");
+        User test = new User("test",passwordEncoder.encode("test"), 200,"USER","");
+        User example = new User("example",passwordEncoder.encode("example"), 100,"USER","");
 
         List<User> users = Arrays.asList(test, example);
 
