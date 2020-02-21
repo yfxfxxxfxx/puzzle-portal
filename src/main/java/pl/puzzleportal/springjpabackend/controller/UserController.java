@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import pl.puzzleportal.springjpabackend.entity.User;
 import pl.puzzleportal.springjpabackend.repository.UserRepository;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -41,6 +43,14 @@ public class UserController {
     @GetMapping(value = "/login/{login}")
     public User retrieveUserByLogin(@PathVariable("login") String login) {
         return Preconditions.checkNotNull(userRepository.findByUsername(login));
+    }
+
+    @GetMapping("/ranked")
+    public List<User> retrieveUsersOrderedByRank(){
+        return retrieveUsers()
+                .stream()
+                .sorted(Comparator.comparing(User::getPoints).reversed())
+                .collect(Collectors.toList());
     }
 
     @PostMapping(value = "/result/{points}")
