@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import pl.puzzleportal.springjpabackend.entity.User;
 import pl.puzzleportal.springjpabackend.repository.UserRepository;
 
@@ -42,6 +41,12 @@ public class UserController {
     @GetMapping(value = "/login/{login}")
     public User retrieveUserByLogin(@PathVariable("login") String login) {
         return Preconditions.checkNotNull(userRepository.findByUsername(login));
+    }
+
+    @PostMapping(value = "/result/{points}")
+    public void addResultToPoints(@PathVariable("points") int points){
+        User destinationUser = getAuthenticatedUser();
+        destinationUser.setPoints(destinationUser.getPoints() + points);
     }
 
     @PostMapping
