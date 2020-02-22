@@ -35,12 +35,35 @@ public class UserController {
         return retrieveUserByLogin(currentPrincipalName);
     }
 
+    @PostMapping("/loggedUserData")
+    public void getAuthenticatedUserData(@RequestBody List<String> credentials) {
+        User toAuthenticate = userRepository.findByUsername(credentials.get(0));
+
+        if(toAuthenticate != null && toAuthenticate.getPassword().equals(credentials.get(1))){
+            System.out.println(toAuthenticate.getActive());
+            if(toAuthenticate.getActive() == 0){
+                toAuthenticate.setActive(1);
+            }
+        }
+    }
+
+    @GetMapping("/is_active")
+    public User checkUserAuthentication(@RequestBody String username) {
+        User userToCheck = userRepository.findByUsername(username);
+
+        if(userToCheck.getActive() == 1) {
+            return userToCheck;
+        } else {
+            return null;
+        }
+    }
+
     @GetMapping(value = "/id/{id}")
     public User retrieveUserById(@PathVariable("id") Long id) {
         return Preconditions.checkNotNull(userRepository.findById(id).orElse(null));
     }
 
-    @GetMapping(value = "/login/{login}")
+    @GetMapping(value = "login/{login}")
     public User retrieveUserByLogin(@PathVariable("login") String login) {
         return Preconditions.checkNotNull(userRepository.findByUsername(login));
     }
