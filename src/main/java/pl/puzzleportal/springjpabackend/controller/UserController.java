@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import pl.puzzleportal.springjpabackend.entity.User;
 import pl.puzzleportal.springjpabackend.exceptions.NotFoundException;
@@ -19,9 +20,11 @@ import java.util.stream.Collectors;
 public class UserController {
 
     private UserRepository userRepository;
+    private PasswordEncoder passwordEncoder;
 
-    public UserController(UserRepository userRepository) {
+    public UserController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping
@@ -46,11 +49,11 @@ public class UserController {
         return Preconditions.checkNotNull(userRepository.findByUsername(login));
     }
 
-    @GetMapping(value = "login/secure/{login}")
-    public User retrieveUserByLoginAndPassword(@PathVariable("login") String login, String password) {
+    @GetMapping(value = "login/secure")
+    public User retrieveUserByLoginAndPassword(String login, String password) {
         User userToAuthenticate = Preconditions.checkNotNull(userRepository.findByUsername(login));
 
-        if(userToAuthenticate.getPassword().equals(password)){
+        if(userToAuthenticate.getPassword().equals(passwordEncoder.encode(password))){
             return userToAuthenticate;
         } else {
             throw new NotFoundException();

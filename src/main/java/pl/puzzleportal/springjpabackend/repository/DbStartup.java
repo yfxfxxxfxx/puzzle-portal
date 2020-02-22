@@ -145,7 +145,7 @@ public class DbStartup implements CommandLineRunner {
                 )
         );
 
-        List<Game> games = Arrays.asList(capitals);
+        List<Game> games = Arrays.asList(capitals, years);
 
         logger.info("uzytkownik zostal zapisany do bazy danych");
         logger.info("gra zostala zapisana do bazy danych");
