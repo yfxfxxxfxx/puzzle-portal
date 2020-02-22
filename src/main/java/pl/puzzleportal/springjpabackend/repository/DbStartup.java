@@ -120,7 +120,7 @@ public class DbStartup implements CommandLineRunner {
                                         legnica,
                                         new Answer("1255")
                                 ),
-                                france
+                                legnica
                         ),
                         new Question(
                                 "Podpisanie pierwszej konstutycji Polski",
@@ -130,24 +130,31 @@ public class DbStartup implements CommandLineRunner {
                                         new Answer("1794"),
                                         new Answer("1788")
                                 ),
-                                france
+                                pierwszaKonstytucja
                         ),
                         new Question(
-                                "Podpisanie ",
+                                "Podpisanie deklaracja niepodległości Stanów Zjednoczonych",
                                 Arrays.asList(
-                                        france,
-                                        new Answer("Berlin"),
-                                        new Answer("Marseilles"),
-                                        new Answer("Warszawa")
+                                        new Answer("1771"),
+                                        new Answer("1783"),
+                                        new Answer("1774"),
+                                        usa
                                 ),
-                                france
+                                niepodlegloscStanow
                         )
                 )
         );
 
-        List<Game> games = new ArrayList<>();
+        Answer einstein = new Answer("1410");
+        Answer asdf = new Answer("1241");
+        Answer adsf = new Answer("1791");
+        Answer adf = new Answer("1776");
 
-        games.add(capitals);
+        Game naukowcy = new Game(
+
+        );
+
+        List<Game> games = Arrays.asList(capitals, years);
 
         logger.info("uzytkownik zostal zapisany do bazy danych");
         logger.info("gra zostala zapisana do bazy danych");
