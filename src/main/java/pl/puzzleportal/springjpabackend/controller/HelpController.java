@@ -24,7 +24,7 @@ public class HelpController {
         return helpMessageRepository.save(message);
     }
 
-    @GetMapping
+    @GetMapping("/admin")
     public List<HelpMessage> displayMessages() {
         return helpMessageRepository.findAll();
     }
