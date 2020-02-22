@@ -5,9 +5,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import pl.puzzleportal.springjpabackend.entity.User;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class UserPrincipal implements UserDetails {
@@ -19,27 +17,11 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorities = new ArrayList<>();
-
-//        //Extract list of permissions (name)
-//        this.user.getPermissionList().forEach(p -> {
-//            GrantedAuthority authority = new SimpleGrantedAuthority(p);
-//            authorities.add(authority);
-//        });
-//
-//        //Extract list of roles (ROLE_name)
-//        this.user.getRoleList().forEach(r -> {
-//            GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + r);
-//            authorities.add(authority);
-//        });
-
         return this.user.getRoleList()
                 .stream()
-                .map(a -> "ROLE_"+a)
+                .map(a -> "ROLE_" + a)
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
-
-//        return authorities;
     }
 
     @Override

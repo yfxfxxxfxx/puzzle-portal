@@ -9,7 +9,6 @@ import pl.puzzleportal.springjpabackend.entity.Game;
 import pl.puzzleportal.springjpabackend.entity.GameInfo;
 import pl.puzzleportal.springjpabackend.repository.GameRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,7 +36,7 @@ public class GameController {
     public List<GameInfo> getInfoFromAllGames(){
         return gameRepository.findAll()
                 .stream()
-                .map(g -> new GameInfo(g.getName(),g.getCategory()))
+                .map(g -> new GameInfo(g.getId(),g.getName(),g.getCategory()))
                 .collect(Collectors.toList());
     }
 
