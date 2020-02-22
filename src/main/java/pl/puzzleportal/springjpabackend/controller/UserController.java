@@ -19,11 +19,9 @@ import java.util.stream.Collectors;
 public class UserController {
 
     private UserRepository userRepository;
-    private PasswordEncoder passwordEncoder;
 
-    public UserController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping
