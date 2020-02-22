@@ -133,7 +133,7 @@ public class DbStartup implements CommandLineRunner {
                                 pierwszaKonstytucja
                         ),
                         new Question(
-                                "Podpisanie deklaracja niepodległości Stanów Zjednoczonych",
+                                "Podpisanie deklaracji niepodległości Stanów Zjednoczonych",
                                 Arrays.asList(
                                         new Answer("1771"),
                                         new Answer("1783"),
