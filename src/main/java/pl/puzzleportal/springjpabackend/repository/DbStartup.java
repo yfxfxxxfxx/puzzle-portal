@@ -138,23 +138,14 @@ public class DbStartup implements CommandLineRunner {
                                         new Answer("1771"),
                                         new Answer("1783"),
                                         new Answer("1774"),
-                                        usa
+                                        niepodlegloscStanow
                                 ),
                                 niepodlegloscStanow
                         )
                 )
         );
 
-        Answer einstein = new Answer("1410");
-        Answer asdf = new Answer("1241");
-        Answer adsf = new Answer("1791");
-        Answer adf = new Answer("1776");
-
-        Game naukowcy = new Game(
-
-        );
-
-        List<Game> games = Arrays.asList(capitals, years);
+        List<Game> games = Arrays.asList(capitals);
 
         logger.info("uzytkownik zostal zapisany do bazy danych");
         logger.info("gra zostala zapisana do bazy danych");
