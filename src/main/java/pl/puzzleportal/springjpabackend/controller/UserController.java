@@ -6,6 +6,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import pl.puzzleportal.springjpabackend.entity.User;
+import pl.puzzleportal.springjpabackend.exceptions.NotFoundException;
 import pl.puzzleportal.springjpabackend.repository.UserRepository;
 
 import java.util.Comparator;
@@ -41,8 +42,14 @@ public class UserController {
     }
 
     @GetMapping(value = "login/{login}")
-    public User retrieveUserByLogin(@PathVariable("login") String login) {
-        return Preconditions.checkNotNull(userRepository.findByUsername(login));
+    public User retrieveUserByLogin(@PathVariable("login") String login, String password) {
+        User userToAuthenticate = Preconditions.checkNotNull(userRepository.findByUsername(login));
+
+        if(userToAuthenticate.getPassword().equals(password)){
+            return userToAuthenticate;
+        } else {
+            throw new NotFoundException();
+        }
     }
 
     @GetMapping("/ranked")

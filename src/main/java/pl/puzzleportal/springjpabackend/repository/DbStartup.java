@@ -115,25 +115,25 @@ public class DbStartup implements CommandLineRunner {
                         new Question(
                                 "Bitwa pod Legnicą",
                                 Arrays.asList(
-                                        france,
-                                        new Answer("Berlin"),
-                                        new Answer("Marseilles"),
-                                        new Answer("Warszawa")
+                                        new Answer("1232"),
+                                        new Answer("1240"),
+                                        legnica,
+                                        new Answer("1255")
                                 ),
                                 france
                         ),
                         new Question(
-                                "Jakie miasto jest stolicą Francji?",
+                                "Podpisanie pierwszej konstutycji Polski",
                                 Arrays.asList(
-                                        france,
-                                        new Answer("Berlin"),
-                                        new Answer("Marseilles"),
-                                        new Answer("Warszawa")
+                                        pierwszaKonstytucja,
+                                        new Answer("1793"),
+                                        new Answer("1794"),
+                                        new Answer("1788")
                                 ),
                                 france
                         ),
                         new Question(
-                                "Jakie miasto jest stolicą Francji?",
+                                "Podpisanie ",
                                 Arrays.asList(
                                         france,
                                         new Answer("Berlin"),
