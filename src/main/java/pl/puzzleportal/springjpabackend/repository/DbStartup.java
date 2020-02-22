@@ -16,14 +16,12 @@ import java.util.logging.Logger;
 public class DbStartup implements CommandLineRunner {
     private UserRepository userRepository;
     private GameRepository gameRepository;
-    private AnswerRepository answerRepository;
     private PasswordEncoder passwordEncoder;
     private Logger logger;
 
-    public DbStartup(UserRepository userRepository, GameRepository gameRepository, AnswerRepository answerRepository, PasswordEncoder passwordEncoder) {
+    public DbStartup(UserRepository userRepository, GameRepository gameRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.gameRepository = gameRepository;
-        this.answerRepository = answerRepository;
         this.passwordEncoder = passwordEncoder;
         this.logger = Logger.getLogger(getClass().getName());
     }
@@ -37,6 +35,7 @@ public class DbStartup implements CommandLineRunner {
         //Create users
         User test = new User("test",passwordEncoder.encode("test"), 200,"USER","");
         User example = new User("example",passwordEncoder.encode("example"), 100,"USER","");
+        User testAdmin = new User("testAdmin",passwordEncoder.encode("testAdmin"),150,"USER,ADMIN","");
 
         List<User> users = Arrays.asList(test, example);
 
