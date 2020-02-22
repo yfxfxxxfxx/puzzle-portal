@@ -20,7 +20,7 @@ public class UserController {
 
     private UserRepository userRepository;
 
-    public UserController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
