@@ -41,8 +41,13 @@ public class UserController {
         return Preconditions.checkNotNull(userRepository.findById(id).orElse(null));
     }
 
-    @GetMapping(value = "login/{login}")
-    public User retrieveUserByLogin(@PathVariable("login") String login, String password) {
+    @GetMapping("/login/{login}")
+    public User retrieveUserByLogin(@PathVariable("login") String login) {
+        return Preconditions.checkNotNull(userRepository.findByUsername(login));
+    }
+
+    @GetMapping(value = "login/secure/{login}")
+    public User retrieveUserByLoginAndPassword(@PathVariable("login") String login, String password) {
         User userToAuthenticate = Preconditions.checkNotNull(userRepository.findByUsername(login));
 
         if(userToAuthenticate.getPassword().equals(password)){
